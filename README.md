@@ -1,2 +1,3 @@
 # SwiftPlayground
-Coursera practice
+Coursera practice for Meta iOS developer.
+Each playground corresponds to one module.
