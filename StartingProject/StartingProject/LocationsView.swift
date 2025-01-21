@@ -1,0 +1,45 @@
+import SwiftUI
+
+
+struct LocationsView: View {
+    @EnvironmentObject var model:Model
+    
+    var body: some View {
+        
+        VStack {
+            LittleLemonLogo() // 1
+                .padding(.top, 50)
+            Group {
+                if model.displayingReservationForm {// 2
+                    Text ("Reservation details")
+                }
+                else {
+                    Text ("Select a location")
+                }
+            }
+            .padding([.leading, .trailing], 40)
+            .padding([.top, .bottom], 8)
+            .background(Color.gray.opacity(0.2))
+            .cornerRadius(20)
+            
+            NavigationView {
+                List(model.restaurants, id: \.city) { restaurant in
+                    NavigationLink (destination: ReservationForm(restaurant)) {
+                        RestaurantView(restaurant)
+                    }
+                }
+                .navigationBarTitle("")
+                .navigationBarHidden(true)
+            }
+        }
+        .padding(.top, -10)
+    }
+    
+    
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            LocationsView().environmentObject(Model())
+        }
+    }
+    
+}
